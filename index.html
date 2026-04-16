@@ -22,7 +22,6 @@
             line-height: 1.6;
         }
 
-        /* Header */
         header {
             background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
             border-bottom: 3px solid var(--accent);
@@ -54,7 +53,6 @@
             font-style: italic;
         }
 
-        /* Tabs */
         .tab-nav {
             display: flex;
             border-bottom: 1px solid #1E293B;
@@ -82,7 +80,6 @@
             border-bottom-color: var(--accent);
         }
 
-        /* Content Areas */
         .container {
             padding: 40px;
             max-width: 900px;
@@ -97,7 +94,6 @@
             display: block;
         }
 
-        /* Framework Styles */
         .intro-text {
             color: var(--text-muted);
             font-size: 17px;
@@ -123,15 +119,6 @@
             font-family: 'Courier New', monospace;
         }
 
-        .big-idea {
-            margin-top: 40px;
-            background: linear-gradient(135deg, #1E293B, #0F172A);
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 28px;
-        }
-
-        /* Example Styles */
         .example-selector {
             display: flex;
             gap: 12px;
@@ -203,8 +190,6 @@
 
         @media (max-width: 600px) {
             .grid-2 { grid-template-columns: 1fr; }
-            .phase-card { grid-template-columns: 1fr; text-align: left; }
-            .phase-num { text-align: left; margin-bottom: 10px; }
         }
     </style>
 </head>
@@ -224,19 +209,9 @@
     <div class="container">
         <section id="framework" class="content-section active">
             <p class="intro-text">
-                Real problems are too big and too human for code alone. The goal is to find the one piece
-                where a computer can actually help — and then let that free you up to do the parts only a human can do.
+                Real problems are too big and too human for code alone. Decomposing a problem allows us to see where a tool can simplify a task and where our own judgment is required.
             </p>
-            
             <div id="phases-list"></div>
-
-            <div class="big-idea">
-                <div class="eyebrow" style="color: var(--accent)">The Big Idea</div>
-                <p style="font-size: 18px; color: #CBD5E1;">
-                    A doctor uses software to analyze lab results — but the doctor still has the conversation, 
-                    makes the call, and cares about the patient. <strong style="color: #F1F5F9;">You are the expert. Code is your tool.</strong>
-                </p>
-            </div>
         </section>
 
         <section id="examples" class="content-section">
@@ -247,28 +222,51 @@
 
     <script>
         const PHASES = [
-            { number: "01", label: "NOTICE", color: "#F59E0B", question: "What real problem do you see in your school, home, or community?", tip: "Small, specific problems are actually better." },
-            { number: "02", label: "NARROW", color: "#10B981", question: "What ONE small thing could code help track, calculate, or decide?", tip: "Code is good at math and patterns." },
-            { number: "03", label: "BUILD", color: "#3B82F6", question: "Write JavaScript that does that one thing.", tip: "Start simple. One function. One calculation." },
-            { number: "04", label: "TEST", color: "#8B5CF6", question: "Does your code actually help? How do you know?", tip: "Try it with real numbers or real situations." },
-            { number: "05", label: "REFLECT", color: "#EF4444", question: "What does the code still need a HUMAN to do?", tip: "Code can't care, decide, or convince." }
+            { number: "01", label: "NOTICE", color: "#F59E0B", question: "What real problem do you see?", tip: "Identify the frustration or fear." },
+            { number: "02", label: "NARROW", color: "#10B981", question: "What ONE small thing can code track?", tip: "Code is great for tracking progress and levels." },
+            { number: "03", label: "BUILD", color: "#3B82F6", question: "Write the logic.", tip: "Focus on the calculation or comparison." },
+            { number: "04", label: "TEST", color: "#8B5CF6", question: "Check the results.", tip: "Does the code flag the right state?" },
+            { number: "05", label: "REFLECT", color: "#EF4444", question: "Where is the Human?", tip: "The human provides the courage and the context." }
         ];
 
         const EXAMPLES = [
             {
-                id: "food", emoji: "🥗", title: "Cafeteria Food Waste",
-                realProblem: "Schools throw away huge amounts of food every single day.",
-                codeHandles: "Calculate weekly waste and flag concerning levels.",
-                humanHandles: "Deciding what to do — talking to staff or changing habits.",
-                concept: "Variables + Math + if/else",
-                code: `function checkFoodWaste(poundsPerDay) {\n  let weeklyWaste = poundsPerDay * 5;\n  if (weeklyWaste > 50) {\n    console.log("⚠️ Serious problem. Time to act.");\n  } else {\n    console.log("✅ Reasonable tracking.");\n  }\n}\ncheckFoodWaste(30);`
+                id: "spiders", emoji: "🕷️", title: "Arachnophobia Tracker",
+                realProblem: "Fear of spiders can be paralyzing, making it hard to go into garages or gardens.",
+                codeHandles: "Tracks 'Exposure Levels' (1-5) and calculates if the student is ready to move to the next level based on their anxiety score.",
+                humanHandles: "Actually looking at the spider, practicing breathing, and deciding when they feel 'safe enough' to try.",
+                concept: "Objects + Conditionals + Logic",
+                code: `// ARACHNOPHOBIA EXPOSURE LADDER
+// The code tracks the level — you handle the breathing.
+
+function checkReadyForNextLevel(currentLevel, anxietyScore) {
+  // Level 1: Look at a cartoon spider
+  // Level 2: Look at a photo
+  // Level 3: Look at a video
+  // Level 4: Look at a real spider in a jar
+  // Level 5: Be in the same room as a spider
+
+  console.log("Current Level: " + currentLevel);
+  console.log("Anxiety Score (1-10): " + anxietyScore);
+
+  if (anxietyScore <= 3) {
+    console.log("✅ Code Suggestion: You've mastered this level. Ready to move up?");
+  } else if (anxietyScore <= 6) {
+    console.log("⚖️ Code Suggestion: Keep practicing at this level. You're doing great.");
+  } else {
+    console.log("🛑 Code Suggestion: Stay here. Take deep breaths. No rush.");
+  }
+}
+
+// TEST IT: current level, anxiety score (1-10)
+checkReadyForNextLevel(2, 4);`
             },
             {
                 id: "homework", emoji: "📚", title: "Homework Overload",
-                realProblem: "Students pile up work from different classes and don't realize the total time.",
-                codeHandles: "Add up estimated minutes and warn if the total is unhealthy.",
-                humanHandles: "Choosing what to do — asking for extensions or re-prioritizing.",
-                concept: "Arrays + Loops + Conditionals",
+                realProblem: "Students take on too much work and don't realize it until they are overwhelmed.",
+                codeHandles: "Add up total minutes and flag unhealthy workloads.",
+                humanHandles: "Talking to the teacher or re-prioritizing which ELA or Math task matters most.",
+                concept: "Arrays + Loops",
                 code: `function checkHomeworkLoad(assignments) {\n  let totalMinutes = 0;\n  assignments.forEach(a => totalMinutes += a.minutes);\n  if (totalMinutes > 180) console.log("🚨 Over 3 hours!");\n}\n\nlet tonightsWork = [\n  { subject: "Math", minutes: 45 },\n  { subject: "ELA", minutes: 60 }\n];\ncheckHomeworkLoad(tonightsWork);`
             }
         ];
@@ -299,8 +297,6 @@
         function showExample(exId) {
             const ex = EXAMPLES.find(e => e.id === exId);
             const container = document.getElementById('example-content');
-            
-            // Update Buttons
             document.querySelectorAll('.ex-btn').forEach(b => b.classList.toggle('active', b.dataset.id === exId));
 
             container.innerHTML = `
@@ -339,7 +335,6 @@
             setTimeout(() => event.target.innerText = "Copy Code", 2000);
         }
 
-        // Initialize
         renderPhases();
         const exBtns = document.getElementById('example-btns');
         exBtns.innerHTML = EXAMPLES.map(e => `
@@ -347,7 +342,7 @@
                 <span>${e.emoji}</span> ${e.title}
             </button>
         `).join('');
-        showExample('food');
+        showExample('spiders');
     </script>
 </body>
 </html>
