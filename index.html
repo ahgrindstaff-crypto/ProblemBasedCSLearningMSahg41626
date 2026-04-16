@@ -157,9 +157,6 @@
         .code-header {
             background: #161B22;
             padding: 12px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             border-bottom: 1px solid #21262D;
         }
 
@@ -170,7 +167,7 @@
             overflow-x: auto;
             white-space: pre-wrap;
             color: #E6EDF3;
-            /* DISABLE SELECTION */
+            /* FORCES STUDENTS TO TYPE MANUALLY */
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
@@ -218,7 +215,7 @@
     <script>
         const PHASES = [
             { number: "01", label: "NOTICE", color: "#F59E0B", question: "What real problem do you see?", tip: "Identify the frustration or fear." },
-            { number: "02", label: "NARROW", color: "#10B981", question: "What ONE small thing can code track?", tip: "Code is great for tracking progress and levels." },
+            { number: "02", label: "NARROW", color: "#10B981", question: "What ONE small thing can code track?", tip: "Code is great for tracking levels and steps." },
             { number: "03", label: "BUILD", color: "#3B82F6", question: "Write the logic.", tip: "Focus on the calculation or comparison." },
             { number: "04", label: "TEST", color: "#8B5CF6", question: "Check the results.", tip: "Does the code flag the right state?" },
             { number: "05", label: "REFLECT", color: "#EF4444", question: "Where is the Human?", tip: "The human provides the courage and the context." }
@@ -226,20 +223,67 @@
 
         const EXAMPLES = [
             {
-                id: "spiders", emoji: "🕷️", title: "Arachnophobia Tracker",
-                realProblem: "Fear of spiders can be paralyzing, making it hard to go into garages or gardens.",
-                codeHandles: "Tracks 'Exposure Levels' (1-5) and calculates if the student is ready to move to the next level based on their anxiety score.",
-                humanHandles: "Actually looking at the spider, practicing breathing, and deciding when they feel 'safe enough' to try.",
-                concept: "Objects + Conditionals + Logic",
-                code: `// ARACHNOPHOBIA EXPOSURE LADDER\n// The code tracks the level — you handle the breathing.\n\nfunction checkReadyForNextLevel(currentLevel, anxietyScore) {\n  // 1: Cartoon, 2: Photo, 3: Video, 4: Real Jar, 5: Same Room\n\n  if (anxietyScore <= 3) {\n    console.log("✅ Ready to move up?");\n  } else if (anxietyScore <= 6) {\n    console.log("⚖️ Keep practicing.");\n  } else {\n    console.log("🛑 Stay here. Breathe.");\n  }\n}\n\ncheckReadyForNextLevel(2, 4);`
+                id: "spiders", emoji: "🕷️", title: "Arachnophobia Exposure Tracker",
+                realProblem: "Overcoming fear requires a counselor-approved 3-step ladder: 1. Picture, 2. Video, 3. Captivity.",
+                codeHandles: "Tracks which of the 3 exposure steps you are on and checks if your calmness score is high enough to advance.",
+                humanHandles: "Actually looking at the spider, practicing controlled breathing, and deciding when you feel safe enough to try.",
+                concept: "If/Else Statements + Comparison",
+                code: `// ARACHNOPHOBIA TRACKER (Counselor Method)
+// Logic handles the ladder — you provide the courage.
+
+function trackExposure(stepNumber, calmScore) {
+  // Step 1: Look at a Picture
+  // Step 2: Watch a Video
+  // Step 3: See a Spider in Captivity
+
+  console.log("Current Step: " + stepNumber);
+  console.log("Calmness Level (1-10): " + calmScore);
+
+  if (calmScore >= 8) {
+    console.log("✅ Code Result: You are very calm. Move to next step?");
+  } else if (calmScore >= 5) {
+    console.log("⚖️ Code Result: Stay here a bit longer. Keep breathing.");
+  } else {
+    console.log("🛑 Code Result: High stress detected. Stop and look away.");
+  }
+}
+
+// TEST IT: Try Step 1 with a calmScore of 9
+trackExposure(1, 9);`
             },
             {
-                id: "homework", emoji: "📚", title: "Homework Overload",
-                realProblem: "Students take on too much work and don't realize it until they are overwhelmed.",
-                codeHandles: "Add up total minutes and flag unhealthy workloads.",
-                humanHandles: "Talking to the teacher or re-prioritizing which ELA or Math task matters most.",
-                concept: "Arrays + Loops",
-                code: `function checkHomeworkLoad(assignments) {\n  let totalMinutes = 0;\n  assignments.forEach(a => totalMinutes += a.minutes);\n  if (totalMinutes > 180) console.log("🚨 Over 3 hours!");\n}\n\nlet tonightsWork = [\n  { subject: "Math", minutes: 45 },\n  { subject: "ELA", minutes: 60 }\n];\ncheckHomeworkLoad(tonightsWork);`
+                id: "homework", emoji: "📚", title: "Homework Sprint Tracker",
+                realProblem: "Assignments pile up. Success requires reviewing due dates, prioritizing, and working in 20-minute sprints.",
+                codeHandles: "Sorts your list by due date and manages a 20-minute timer for your current priority task.",
+                humanHandles: "Deciding which priority to focus on and choosing to finish an assignment if it is almost done.",
+                concept: "Arrays + Object Sorting + Logic",
+                code: `// HOMEWORK PRIORITIZER (Teacher Method)
+// Code manages the list — you manage the focus.
+
+function startHomeworkSession(assignments) {
+  // 1. Sort assignments to see what is due first
+  assignments.sort((a, b) => a.daysLeft - b.daysLeft);
+  
+  let currentTask = assignments[0];
+  console.log("Next Priority: " + currentTask.subject);
+
+  // 2. Sprint Timer (20 minutes)
+  console.log("⏰ 20-minute timer started for " + currentTask.subject);
+
+  // 3. Human decision point
+  if (currentTask.percentDone > 85) {
+    console.log("💡 Suggestion: You are close! Finish this now.");
+  } else {
+    console.log("💡 Suggestion: Complete one 20min sprint, then repeat.");
+  }
+}
+
+let myWork = [
+  { subject: "Math", daysLeft: 3, percentDone: 10 },
+  { subject: "ELA",  daysLeft: 1, percentDone: 90 }
+];
+
+startHomeworkSession(myWork);`
             }
         ];
 
