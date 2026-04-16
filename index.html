@@ -170,16 +170,11 @@
             overflow-x: auto;
             white-space: pre-wrap;
             color: #E6EDF3;
-        }
-
-        .copy-btn {
-            background: #21262D;
-            border: 1px solid #30363D;
-            color: #8B949E;
-            padding: 6px 14px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
+            /* DISABLE SELECTION */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .grid-2 {
@@ -236,30 +231,7 @@
                 codeHandles: "Tracks 'Exposure Levels' (1-5) and calculates if the student is ready to move to the next level based on their anxiety score.",
                 humanHandles: "Actually looking at the spider, practicing breathing, and deciding when they feel 'safe enough' to try.",
                 concept: "Objects + Conditionals + Logic",
-                code: `// ARACHNOPHOBIA EXPOSURE LADDER
-// The code tracks the level — you handle the breathing.
-
-function checkReadyForNextLevel(currentLevel, anxietyScore) {
-  // Level 1: Look at a cartoon spider
-  // Level 2: Look at a photo
-  // Level 3: Look at a video
-  // Level 4: Look at a real spider in a jar
-  // Level 5: Be in the same room as a spider
-
-  console.log("Current Level: " + currentLevel);
-  console.log("Anxiety Score (1-10): " + anxietyScore);
-
-  if (anxietyScore <= 3) {
-    console.log("✅ Code Suggestion: You've mastered this level. Ready to move up?");
-  } else if (anxietyScore <= 6) {
-    console.log("⚖️ Code Suggestion: Keep practicing at this level. You're doing great.");
-  } else {
-    console.log("🛑 Code Suggestion: Stay here. Take deep breaths. No rush.");
-  }
-}
-
-// TEST IT: current level, anxiety score (1-10)
-checkReadyForNextLevel(2, 4);`
+                code: `// ARACHNOPHOBIA EXPOSURE LADDER\n// The code tracks the level — you handle the breathing.\n\nfunction checkReadyForNextLevel(currentLevel, anxietyScore) {\n  // 1: Cartoon, 2: Photo, 3: Video, 4: Real Jar, 5: Same Room\n\n  if (anxietyScore <= 3) {\n    console.log("✅ Ready to move up?");\n  } else if (anxietyScore <= 6) {\n    console.log("⚖️ Keep practicing.");\n  } else {\n    console.log("🛑 Stay here. Breathe.");\n  }\n}\n\ncheckReadyForNextLevel(2, 4);`
             },
             {
                 id: "homework", emoji: "📚", title: "Homework Overload",
@@ -322,17 +294,10 @@ checkReadyForNextLevel(2, 4);`
                 <div class="code-container">
                     <div class="code-header">
                         <span style="color: #8B949E; font-size: 13px;">starter.js · ${ex.concept}</span>
-                        <button class="copy-btn" onclick="copyCode(\`${ex.code}\`)">Copy Code</button>
                     </div>
                     <pre><code>${ex.code}</code></pre>
                 </div>
             `;
-        }
-
-        function copyCode(text) {
-            navigator.clipboard.writeText(text);
-            event.target.innerText = "✓ Copied!";
-            setTimeout(() => event.target.innerText = "Copy Code", 2000);
         }
 
         renderPhases();
